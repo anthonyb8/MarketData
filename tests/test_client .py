@@ -1,7 +1,7 @@
 import psycopg2
 import unittest
 import logging, sys
-from client.main import MarketDataClient
+from MarketDataClient import Client
 from typing import Optional, List, Dict
 
 # Setup logger
@@ -14,7 +14,7 @@ logger.addHandler(stream_handler)
 class BaseTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.client = MarketDataClient()
+        cls.client = Client()
         try:
             cls.client.delete_tables()
             cls.client.create_tables()

@@ -3,7 +3,7 @@ from urllib.parse import urljoin
 import datetime as dt
 from typing import List, Optional, Union
 
-class MarketDataClient:
+class Client:
     """
     A client interface to interact with the Market Data API.
     
@@ -75,6 +75,9 @@ class MarketDataClient:
         url = urljoin(self.base_url, endpoint)
         response = getattr(self.session, method)(url, json=data, params=params)
         return self._error_handling(response)
+    
+    def test_database_connection(self):
+        return self._request("get", "/api/database/connection-check")
 
     def create_tables(self):
         """
