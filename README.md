@@ -19,21 +19,93 @@ https://www.postgresql.org/download/
 
 https://www.docker.com/products/docker-desktop/
 
-### 3. Create database and user
+### 3. Create database and user(optional)
+```
+psql - U postgres;
 
+```
+```
+CREATE DATABASE database_name;
 
-### 4. Create docker image and containerize
+```
+### 4. Clone repository to local directory
+```
+git clone https://github.com/anthonyb8/MarketData.git
 
+```
+### 5. Create .env file in api directory
+    - file should contan the variablt below updated with database credentials, not if API docker is not running locally host.docker.internal will have to be updated to correct host.
+```
+DATABASE_URL = "postgresql://<user>:<password>@host.docker.internal/<database_name>"
+```
+### 6. Create docker image and container
+- Below commands must be made from the root MarketData directory.
+```
+docker-compose build
+```
+```
+docker-compose up -d
+```
 
-### 5. Download client library
+### 7. Install client library
+```
+pip install MarketDataClient
 
-### 6. Create Database Schema
+```
 
 ### Examples
 
 ### 1. Create Asset
+```
+client = MarketDataClient()
+
+new_asset = {
+    "ticker" : "AAPL", 
+    "type" : "equity"
+}
+
+response = client.create_asset(asset = new_asset)
+
+```
 
 ### 2. Add Asset Details
+```
+asset_details = {
+    'company_name' : 'Apple Inc.',
+    'exchange' : 'NASDAQ',
+    'currency' :  'USD',
+    'industry' : 'Technology',
+    'description' : 'Equity for Apple Inc. a technologies producer.',
+    'market_cap' : 100000,
+    'shares_outstanding' : 100000
+}
 
+response = client.create_asset_details(ticker="AAPL", asset_type="equity",data=asset_details)
+
+```
 ### 3. Add Asset Bardata
+```
+asset_bardata =  [
+    {
+        'date' : '2023-01-01',
+        'open': 100.0,
+        'close': 101.0,
+        'high': 102.0,
+        'low': 103,
+        'volume': 109,
+        'adjusted_close' : 1100.0
+    }, 
+    {
+        'date' : '2023-01-02',
+        'open': 100.0,
+        'close': 101.0,
+        'high': 102.0,
+        'low': 103,
+        'volume': 109,
+        'adjusted_close' : 1100.0
+    }
+]
 
+response = client.create_bardata(ticker="AAPL", asset_type="equity", data=asset_bardata)
+
+```
