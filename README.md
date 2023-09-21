@@ -20,26 +20,29 @@ https://www.postgresql.org/download/
 https://www.docker.com/products/docker-desktop/
 
 ### 3. Create database and user(optional)
+
 ```
 psql - U postgres;
+```
+```
+CREATE DATABASE <database_name>;
+```
 
-```
-```
-CREATE DATABASE database_name;
-
-```
 ### 4. Clone repository to local directory
+
 ```
 git clone https://github.com/anthonyb8/MarketData.git
-
 ```
+
 ### 5. Create .env file in api directory
-    - file should contan the variablt below updated with database credentials, not if API docker is not running locally host.docker.internal will have to be updated to correct host.
+Add the below variable to a .env file in the api directory and update database credentials. 
+- Note: If Docker is not running locally, host.docker.internal will have to be updated to the correct host.
 ```
 DATABASE_URL = "postgresql://<user>:<password>@host.docker.internal/<database_name>"
 ```
-### 6. Create docker image and container
-- Below commands must be made from the root MarketData directory.
+
+### 6. Create the Docker image and container
+Below commands must be made from the root MarketData directory.
 ```
 docker-compose build
 ```
@@ -50,13 +53,12 @@ docker-compose up -d
 ### 7. Install client library
 ```
 pip install MarketDataClient
-
 ```
 
-### Examples
+## Examples
 
 ### 1. Create Asset
-```
+```python
 client = MarketDataClient()
 
 new_asset = {
@@ -69,7 +71,7 @@ response = client.create_asset(asset = new_asset)
 ```
 
 ### 2. Add Asset Details
-```
+```python
 asset_details = {
     'company_name' : 'Apple Inc.',
     'exchange' : 'NASDAQ',
@@ -84,7 +86,7 @@ response = client.create_asset_details(ticker="AAPL", asset_type="equity",data=a
 
 ```
 ### 3. Add Asset Bardata
-```
+```python
 asset_bardata =  [
     {
         'date' : '2023-01-01',
