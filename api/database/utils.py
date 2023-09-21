@@ -1,6 +1,10 @@
 from database.engine import engine, Session
 from database.models import Base
 import sqlalchemy
+from sqlalchemy import text
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from sqlalchemy.orm import Session as session
 
 def _get_db():
     db = None
@@ -12,6 +16,15 @@ def _get_db():
     finally:
         if db:
             db.close()
+
+def _check_database_connection(db: "session"):
+    """Checks if the API can successfully connect to the database."""
+    try:
+        result = db.execute(text("SELECT 1")).scalar()
+        if result == 1:
+            return {"status": "success", "message": "Successfully connected to the database"}
+    except Exception as e:
+        return {"status": "failure", "message": f"Database connection failed: {e}"}
 
 def _create_tables():
     try:

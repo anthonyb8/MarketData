@@ -9,6 +9,11 @@ router = APIRouter()
 
 # =================== ADMIN ENDPOINTS ===================
 
+@router.get("/api/database/connection-check")
+def check_database_connection(db: Session = Depends(database_utils._get_db)):
+    """Checks if the API can successfully connect to the database."""
+    return database_utils._check_database_connection(db=db)
+
 # Endpoint to construct database tables
 @router.post("/api/database/")
 def create_tables():
