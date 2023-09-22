@@ -1,4 +1,4 @@
-# MarketData
+# MarketDatabaseManager
 
 ![python](https://img.shields.io/badge/python-3.8+-blue.svg)
 
@@ -31,7 +31,7 @@ CREATE DATABASE <database_name>;
 ### 4. Clone repository to local directory
 
 ```
-git clone https://github.com/anthonyb8/MarketData.git
+git clone https://github.com/anthonyb8/MarketDatabaseManager.git
 ```
 
 ### 5. Create .env file in api directory
