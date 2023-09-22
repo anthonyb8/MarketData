@@ -1,7 +1,7 @@
 import psycopg2
 import unittest
 import logging, sys
-from MarketDataClient import Client
+from MarketDataClient.client import Client
 from typing import Optional, List, Dict
 
 # Setup logger
