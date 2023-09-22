@@ -17,32 +17,32 @@ MarketDatabaseManager is your complete solution for interacting with financial a
 
 ## 🚀 Installation
 
-### 1️⃣ Install PostgreSQL
+#### 1️⃣ Install PostgreSQL
 - [PostgreSQL Official Download](https://www.postgresql.org/download/)
 
-### 2️⃣ Install Docker
+#### 2️⃣ Install Docker
 - [Docker Desktop Official Download](https://www.docker.com/products/docker-desktop/)
 
-### 3️⃣ Create Database
+#### 3️⃣ Create Database
 ```bash
 psql -U postgres;
 
 CREATE DATABASE <database_name>;
 ```
 
-### 4️⃣ Clone the repository
+#### 4️⃣ Clone the repository
 ```bash
 git clone https://github.com/anthonyb8/MarketDatabaseManager.git
 ```
 
-### 5️⃣ Set up your environment
+#### 5️⃣ Set up your environment
 Create a `.env` file in the `api` directory and insert your database credentials:
 ```plaintext
 DATABASE_URL = "postgresql://<user>:<password>@host.docker.internal/<database_name>"
 ```
 > ⚠️ Note: If Docker isn't running locally, replace `host.docker.internal` with the appropriate host.
 
-### 6️⃣ Dockerize
+#### 6️⃣ Dockerize
 From the root `MarketDatabaseManager` directory, run the following commands to build and start the Docker container:
 ```bash
 docker-compose build
@@ -50,7 +50,7 @@ docker-compose build
 docker-compose up -d
 ```
 
-### 7️⃣ Install the client library
+#### 7️⃣ Install the client library
 While in the root directory of your project (not the `MarketDatabaseManager` directory), execute the following commands to set up the virtual environment and install the client library:
 ```bash
 python3.10 -m venv venv
@@ -62,7 +62,7 @@ pip install MarketDataManager
 
 ## 📌 Examples
 
-### Create Database Tables
+#### Create Database Tables
 ```python
 from MarketDataManager import Client
 
@@ -70,7 +70,7 @@ client = Client()
 client.create_tables()
 ```
 
-### Create Asset
+#### Create Asset
 ```python
 new_asset = {
     "ticker" : "AAPL", 
@@ -79,7 +79,7 @@ new_asset = {
 client.create_asset(asset = new_asset)
 ```
 
-### Add Asset Details
+#### Add Asset Details
 ```python
 asset_details = {
     'company_name' : 'Apple Inc.',
@@ -92,7 +92,7 @@ asset_details = {
 }
 client.create_asset_details(ticker="AAPL", asset_type="equity",data=asset_details)
 ```
-### Add Asset Bardata
+#### Add Asset Bardata
 ```python
 asset_bardata =  [
     {
