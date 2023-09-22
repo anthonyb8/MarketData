@@ -52,14 +52,15 @@ docker-compose up -d
 
 ### 7. Install client library
 ```
-pip install MarketDataClient
+pip install MarketDataManager
 ```
 
 ## Examples
 
 ### 1. Create Asset
 ```python
-client = MarketDataClient()
+from MarketDataManager import Client
+client = Client()
 
 new_asset = {
     "ticker" : "AAPL", 
