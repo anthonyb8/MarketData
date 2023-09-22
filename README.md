@@ -22,7 +22,7 @@ https://www.docker.com/products/docker-desktop/
 ### 3. Create database and user(optional)
 
 ```
-psql - U postgres;
+psql -U postgres;
 ```
 ```
 CREATE DATABASE <database_name>;
@@ -42,7 +42,7 @@ DATABASE_URL = "postgresql://<user>:<password>@host.docker.internal/<database_na
 ```
 
 ### 6. Create the Docker image and container
-Below commands must be made from the root MarketData directory.
+Below commands must be made from the root MarketDatabaseManager directory.
 ```
 docker-compose build
 ```
@@ -51,17 +51,29 @@ docker-compose up -d
 ```
 
 ### 7. Install client library
+In the root directory of the project you are working on, not the MarketDatabaseManager directory.
+```
+python3.10 -m venv venv
+```
+```
+source venv/bin/activate
+```
 ```
 pip install MarketDataManager
 ```
 
 ## Examples
 
-### 1. Create Asset
+### Create Database Tables
 ```python
 from MarketDataManager import Client
-client = Client()
 
+client = Client()
+client.create_tables()
+```
+
+### Create Asset
+```python
 new_asset = {
     "ticker" : "AAPL", 
     "type" : "equity"
@@ -71,7 +83,7 @@ response = client.create_asset(asset = new_asset)
 
 ```
 
-### 2. Add Asset Details
+### Add Asset Details
 ```python
 asset_details = {
     'company_name' : 'Apple Inc.',
@@ -86,7 +98,7 @@ asset_details = {
 response = client.create_asset_details(ticker="AAPL", asset_type="equity",data=asset_details)
 
 ```
-### 3. Add Asset Bardata
+### Add Asset Bardata
 ```python
 asset_bardata =  [
     {
